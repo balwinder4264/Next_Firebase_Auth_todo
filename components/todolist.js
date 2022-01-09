@@ -1,4 +1,5 @@
-const { useState, useEffect } = require("react")
+
+import React, { useEffect, useState } from "react"
 import { collection, doc, onSnapshot, orderBy, query, getDoc, where } from "firebase/firestore";
 import { useAuth } from "../Auth";
 import { db } from "../firebase"
@@ -28,12 +29,15 @@ const TodoList = ({ todosProps }) => {
     // }
     return <div className="flex justify-center flex-col items-center m-10">
         {todos.map((item) => {
-            return <Todo
-                id={item.id}
-                timestamp={item.timestamp}
-                title={item.title}
-                detail={item.detail}
-            />
+            return <div key={item.id}>
+                <Todo
+                    id={item.id}
+                    timestamp={item.timestamp}
+                    title={item.title}
+                    detail={item.detail}
+                />
+            </div>
+
         })}
     </div>
 }

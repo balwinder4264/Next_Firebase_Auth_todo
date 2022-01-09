@@ -1,10 +1,11 @@
-import { addDoc, collection, serverTimestamp, updateDoc, doc } from 'firebase/firestore'
 import React, { useEffect, useRef, useState } from 'react'
+import { addDoc, collection, serverTimestamp, updateDoc, doc } from 'firebase/firestore'
+
 import { useAuth } from '../Auth';
 import { db } from '../firebase'
 import { useTodo } from '../store/websiteLook';
 
-const todoForm = () => {
+const TodoForm = () => {
     const inputAreaRef = useRef();
     const { currentUser } = useAuth()
     const { title, detail, setTitle, settDetail, setTodoIdForUpdate, todoIdForUpdate } = useTodo()
@@ -75,4 +76,4 @@ const todoForm = () => {
     )
 }
 
-export default todoForm
+export default TodoForm

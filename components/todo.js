@@ -21,7 +21,7 @@ const Todo = ({ id, timestamp, title, detail }) => {
         setTitle(detail);
         setTodoIdForUpdate(id)
     }}>
-        <div className="flex font-medium space-x-5">
+        <div className="flex font-medium space-x-5" >
             <div>
                 {title}
             </div>
