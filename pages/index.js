@@ -43,20 +43,21 @@ export async function getServerSideProps(context) {
     const cookies = nookies.get(context);
 
     const token = await vertifyIdToken(cookies.token);
-
+    console.log("cookies=>", cookies.token)
     const { email } = token;
+    //How to get tabel information 
     const collectionref = collection(db, "todos");
+    //Querry on that table
     const q = query(collectionref, where("email", "==", email), orderBy("timestamp", "desc"));
+    //Get all the docs
     const querrySnapshot = await getDocs(q);
-
+    //itrate through that data
     querrySnapshot.forEach(doc => {
-
       todos.push({ ...doc.data(), id: doc.id, timestamp: doc.data().timestamp.toDate().getTime() })
     })
   } catch (error) {
     console.log("eror=>", error)
   }
-
   return {
     props: {
       todosProps: JSON.stringify(todos) || []

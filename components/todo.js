@@ -8,6 +8,7 @@ const Todo = ({ id, timestamp, title, detail }) => {
     const router = useRouter();
     const { setTitle, settDetail, setTodoIdForUpdate } = useTodo()
     const deleteHandler = async (e) => {
+        //one document delete 
         const docRef = doc(db, "todos", id);
         await deleteDoc(docRef)
         alert("item deleted");

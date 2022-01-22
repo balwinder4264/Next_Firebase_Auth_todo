@@ -23,7 +23,6 @@ export const AuthProvider = ({ children }) => {
                 return
             }
             const token = await user.getIdToken();
-
             setCookie(null, "token", token, {});
             setCurrentUser(user)
 

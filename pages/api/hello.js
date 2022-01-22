@@ -1,5 +1,15 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-
-export default function handler(req, res) {
-  res.status(200).json({ name: 'John Doe' })
+import { db } from "../../firebase"
+import { collection, query, orderBy, getDocs } from 'firebase/firestore'
+export default async function handler(req, res) {
+  const collectionref = collection(db, "todos");
+  const q = query(collectionref, orderBy("timestamp", "desc"));
+  //Get all the docs
+  const todos = [];
+  const querrySnapshot = await getDocs(q);
+  //itrate through that data
+  querrySnapshot.forEach(doc => {
+    todos.push({ ...doc.data(), id: doc.id, timestamp: doc.data().timestamp.toDate().getTime() })
+  })
+  res.status(200).json({ name: todos })
 }

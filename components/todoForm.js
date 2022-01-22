@@ -23,7 +23,6 @@ const TodoForm = () => {
         }
         if (todoIdForUpdate) {
             //upadte todo
-
             const docRef = doc(db, "todos", todoIdForUpdate);
             const todoUpdated = { ...data };
             updateDoc(docRef, todoUpdated)
@@ -31,13 +30,13 @@ const TodoForm = () => {
             settDetail("");
             setTodoIdForUpdate(false)
             alert(`todo with id ${docRef.id} is updated succesfully`)
-
         } else {
+            //creating collection which needd daatbse name and collection name
             const collectionRef = collection(db, "todos");
+            // Give table and  save the information
             const docRef = await addDoc(collectionRef, { ...data, timestamp: serverTimestamp() });
             setTitle("");
             settDetail("");
-
             alert(`todo with id ${docRef.id} is added succesfully`)
         }
 
