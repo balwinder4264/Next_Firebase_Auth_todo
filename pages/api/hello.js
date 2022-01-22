@@ -1,7 +1,14 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import { db } from "../../firebase"
 import { collection, query, orderBy, getDocs } from 'firebase/firestore'
+import initMiddleware from '../../lib/init-middleware'
+
+
+import Cors from 'cors'
+// Initialize the cors middleware
+
 export default async function handler(req, res) {
+  const cors12 = await Cors();
   const collectionref = collection(db, "todos");
   const q = query(collectionref, orderBy("timestamp", "desc"));
   //Get all the docs
